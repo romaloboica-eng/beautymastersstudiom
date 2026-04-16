@@ -12,7 +12,7 @@
     <header>
       <div class="logo-container" id="logoContainer">
         <div class="logo-svg" id="logoSvg">
-          <img src="images/logo.png" alt="Beauty Masters Studio">
+          <img src="images/logo.png" alt="Beauty Masters Studio" onerror="this.style.display='none'">
         </div>
         <div class="logo-text" id="logoText" style="display: none;">
           <div>Beauty Masters Studio</div>
@@ -35,13 +35,10 @@
     </div>
     
     <div id="requestsContainer">
-      <div style="background:white; border-radius:12px; padding:40px; text-align:center; color:#888;">
-        Загрузка заявок...
-      </div>
+      <div style="background:white; border-radius:12px; padding:40px; text-align:center; color:#888;">Загрузка заявок...</div>
     </div>
   </div>
   
-  <!-- Модалка выбора времени -->
   <div id="timePickerModal" class="modal">
     <div class="modal-content">
       <h2>Предложите время клиенту</h2>
@@ -53,7 +50,6 @@
     </div>
   </div>
   
-  <!-- Модалка оценки клиента -->
   <div id="clientRatingModal" class="modal">
     <div class="modal-content">
       <h2>Завершить запись</h2>
@@ -68,7 +64,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script type="module" src="master.js"></script>
+  <script src="master.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const logoSvg = document.getElementById('logoSvg');
@@ -81,10 +77,7 @@
           logoSvg.style.display = 'none';
           logoText.style.display = 'block';
           logoText.classList.remove('hide');
-          
-          timeoutId = setTimeout(() => {
-            showLogo();
-          }, 6000);
+          timeoutId = setTimeout(showLogo, 6000);
         }, 300);
       }
       
@@ -95,20 +88,12 @@
           logoSvg.style.display = 'block';
           logoSvg.classList.remove('hide');
           logoSvg.classList.add('show');
-          
-          setTimeout(() => {
-            logoSvg.classList.remove('show');
-          }, 300);
-          
-          timeoutId = setTimeout(() => {
-            showText();
-          }, 5000);
+          setTimeout(() => logoSvg.classList.remove('show'), 300);
+          timeoutId = setTimeout(showText, 5000);
         }, 300);
       }
       
-      timeoutId = setTimeout(() => {
-        showText();
-      }, 5000);
+      timeoutId = setTimeout(showText, 5000);
     });
   </script>
 </body>
