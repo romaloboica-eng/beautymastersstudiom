@@ -1,0 +1,525 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  background: #e8e8e8;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
+  background: #ffffff;
+  padding: 20px 28px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  border: 1px solid #e0e0e0;
+}
+
+h1 {
+  color: #2c2c2c;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+
+h2 {
+  color: #3a3a3a;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+h3 {
+  color: #4a4a4a;
+  margin: 16px 0 8px 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Кнопки */
+.switch-btn {
+  background: #6c6c6c;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.switch-btn:hover {
+  background: #525252;
+}
+
+button {
+  background: #6c6c6c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #525252;
+}
+
+button.danger {
+  background: #b33;
+}
+
+button.danger:hover {
+  background: #922;
+}
+
+/* Карточки мастеров */
+.masters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.master-card, .request-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eaeaea;
+}
+
+.master-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: #c0c0c0;
+}
+
+.master-avatar {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.master-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 8px 0 4px;
+  color: #2c2c2c;
+}
+
+.master-role {
+  color: #7a7a7a;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+/* Модальные окна */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 16px;
+  max-width: 520px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d4d4d4;
+}
+
+/* Элементы форм */
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 8px 0 12px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fefefe;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #888;
+  box-shadow: 0 0 0 2px rgba(108, 108, 108, 0.2);
+}
+
+/* Услуги и слоты */
+.service-item, .time-slot {
+  padding: 10px 14px;
+  margin: 8px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #fafafa;
+  font-size: 14px;
+}
+
+.service-item:hover, .time-slot:hover {
+  background: #eeeeee;
+  border-color: #aaa;
+}
+
+.service-item.selected, .time-slot.selected, .time-card.selected {
+  background: #6c6c6c;
+  color: white;
+  border-color: #525252;
+}
+
+/* Бейджи статусов */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-pending { background: #e67e22; color: white; }
+.status-waiting { background: #3498db; color: white; }
+.status-confirmed { background: #27ae60; color: white; }
+.status-completed { background: #7f8c8d; color: white; }
+.status-cancelled { background: #c0392b; color: white; }
+
+/* Вкладки */
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #d0d0d0;
+  padding-bottom: 8px;
+}
+
+.tab-btn {
+  background: transparent;
+  color: #555;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.tab-btn.active {
+  background: #6c6c6c;
+  color: white;
+}
+
+.badge {
+  background: #b33;
+  color: white;
+  border-radius: 30px;
+  padding: 2px 8px;
+  font-size: 11px;
+  margin-left: 8px;
+}
+
+/* Карточки времени */
+.times-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.time-card {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  border: 1px solid #e2e2e2;
+  font-size: 13px;
+}
+
+.time-card:hover {
+  background: #e8e8e8;
+  transform: translateY(-1px);
+}
+
+/* Оценки */
+.rating-stars {
+  font-size: 28px;
+  cursor: pointer;
+  color: #b0b0b0;
+  letter-spacing: 4px;
+  margin: 12px 0;
+}
+
+.rating-stars span:hover,
+.rating-stars span.active {
+  color: #6c6c6c;
+}
+
+.review-text {
+  width: 100%;
+  padding: 10px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* Кнопки карт (нижний правый угол) */
+.map-buttons {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 12px;
+  z-index: 99;
+}
+
+.map-btn {
+  background: #ffffff;
+  padding: 8px 16px;
+  border-radius: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: 1px solid #d0d0d0;
+}
+
+.map-btn.g2gis { background: #2c6e2c; color: white; border: none; }
+.map-btn.yandex { background: #c7b02c; color: #2c2c2c; border: none; }
+
+.map-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Доп. элементы */
+.request-card {
+  cursor: default;
+  margin-bottom: 16px;
+}
+
+.request-card strong {
+  color: #2c3e2c;
+}
+
+.completed-section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #eaeaea;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e2e2e2;
+  margin: 16px 0;
+}
+
+.text-muted {
+  color: #888;
+  font-size: 12px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+  
+  .tabs {
+    gap: 6px;
+  }
+  
+  .tab-btn {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+  
+  .map-buttons {
+    bottom: 16px;
+    right: 16px;
+    gap: 8px;
+  }
+  
+  .map-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}
+/* Логотип и анимация */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+.logo-svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(71, 74, 83, 0.3));
+  transition: all 0.3s ease;
+}
+
+.logo-svg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.logo-svg svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #2c2c2c;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: slideIn 0.5s ease forwards;
+}
+
+.logo-text p {
+  font-size: 12px;
+  font-weight: normal;
+  color: #6c6c6c;
+  margin: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.logo-text.hide {
+  animation: slideOut 0.5s ease forwards;
+}
+
+.logo-svg.hide {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.logo-svg.show {
+  animation: fadeIn 0.3s ease forwards;
+}
+/* Аватарки мастеров */
+.master-avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(71, 74, 83, 0.2);
+}
+
+.master-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.master-avatar .fallback {
+  font-size: 48px;
+  color: #6c6c6c;
+}
+
+/* Для карточки мастера */
+.master-card {
+  text-align: center;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beauty Masters Studio - Онлайн запись</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-container" id="logoContainer">
+        <div class="logo-svg" id="logoSvg">
+          <img src="images/logo.png" alt="Beauty Masters Studio">
+        </div>
+        <div class="logo-text" id="logoText" style="display: none;">
+          <div>Beauty Masters Studio</div>
+          <p>Онлайн запись</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <span id="userNameDisplay" style="color: #6c6c6c; font-size: 14px;"></span>
+        <button id="logoutBtn" style="display: none; background: #b33; padding: 8px 15px;">Выйти</button>
+        <button id="loginBtn" class="switch-btn">Войти / Регистрация</button>
+        
+      </div>
+    </header>
+    
+    <div id="authSection">
+      <h2>Выберите мастера</h2>
+      <div class="masters-grid" id="mastersGrid"></div>
+    </div>
+    
+    <div id="historySection" style="display: none; margin-top: 40px;">
+      <h2>Мои записи</h2>
+      <div id="historyContainer"></div>
+    </div>
+  </div>
+
+  <!-- Модалка входа/регистрации -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <h2 id="authModalTitle">Вход</h2>
+      <input type="email" id="authEmail" placeholder="Email">
+      <input type="password" id="authPassword" placeholder="Пароль">
+      <div id="authNameField" style="display: none;">
+        <input type="text" id="authName" placeholder="Ваше имя">
+      </div>
+      <button id="authSubmitBtn">Войти</button>
+      <button id="authSwitchBtn" style="background: #999;">Нет аккаунта? Зарегистрироваться</button>
+      <button onclick="closeAuthModal()" style="background: #b33;">Закрыть</button>
+    </div>
+  </div>
+
+  <!-- Модалка записи -->
+  <div id="bookingModal" class="modal">
+    <div class="modal-content">
+      <h2 id="modalMasterName"></h2>
+      <h3>Выберите услугу</h3>
+      <div id="servicesList"></div>
+      <button id="sendRequestBtn">Отправить заявку</button>
+      <button onclick="closeModal()" style="background:#999;">Отмена</button>
+    </div>
+  </div>
+
+  <!-- Модалка выбора времени -->
+  <div id="timeModal" class="modal">
+    <div class="modal-content">
+      <h2>Выберите удобное время</h2>
+      <div id="timeOptions"></div>
+      <button id="confirmTimeBtn">Подтвердить запись</button>
+      <button id="cancelTimeBtn" style="background:#b33;">Отменить заявку</button>
+    </div>
+  </div>
+
+  <!-- Модалка оценки мастера -->
+  <div id="ratingModal" class="modal">
+    <div class="modal-content">
+      <h2>Оцените мастера</h2>
+      <div class="rating-stars" id="ratingStars">★★★★★</div>
+      <textarea id="reviewText" class="review-text" rows="3" placeholder="Ваш отзыв..."></textarea>
+      <button id="submitRatingBtn">Отправить оценку</button>
+      <button onclick="closeRatingModal()" style="background:#999;">Позже</button>
+    </div>
+  </div>
+
+  <!-- Кнопки карт -->
+  <div class="map-buttons">
+    <a href="#" id="g2gisLink" target="_blank" class="map-btn g2gis">Оценить в 2ГИС</a>
+    <a href="#" id="yandexLink" target="_blank" class="map-btn yandex">Оценить в Яндекс.Картах</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script type="module" src="client.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoSvg = document.getElementById('logoSvg');
+      const logoText = document.getElementById('logoText');
+      let timeoutId = null;
+      
+      function showText() {
+        logoSvg.classList.add('hide');
+        setTimeout(() => {
+          logoSvg.style.display = 'none';
+          logoText.style.display = 'block';
+          logoText.classList.remove('hide');
+          
+          timeoutId = setTimeout(() => {
+            showLogo();
+          }, 6000);
+        }, 300);
+      }
+      
+      function showLogo() {
+        logoText.classList.add('hide');
+        setTimeout(() => {
+          logoText.style.display = 'none';
+          logoSvg.style.display = 'block';
+          logoSvg.classList.remove('hide');
+          logoSvg.classList.add('show');
+          
+          setTimeout(() => {
+            logoSvg.classList.remove('show');
+          }, 300);
+          
+          timeoutId = setTimeout(() => {
+            showText();
+          }, 5000);
+        }, 300);
+      }
+      
+      timeoutId = setTimeout(() => {
+        showText();
+      }, 5000);
+    });
+  </script>
+</body>
+</html>

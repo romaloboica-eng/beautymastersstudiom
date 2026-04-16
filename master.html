@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beauty Masters Studio - Панель мастера</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-container" id="logoContainer">
+        <div class="logo-svg" id="logoSvg">
+          <img src="images/logo.png" alt="Beauty Masters Studio">
+        </div>
+        <div class="logo-text" id="logoText" style="display: none;">
+          <div>Beauty Masters Studio</div>
+          <p>Панель мастера</p>
+        </div>
+      </div>
+      <a href="client.html" class="switch-btn">← На сайт клиентов</a>
+    </header>
+    
+    <div style="background:white; padding:20px; border-radius:12px; margin-bottom:24px; border:1px solid #e0e0e0;">
+      <label>Выберите профиль мастера</label>
+      <select id="masterSelect"></select>
+    </div>
+    
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="new">Новые</button>
+      <button class="tab-btn" data-tab="waiting">Ожидают времени</button>
+      <button class="tab-btn" data-tab="confirmed">Подтверждённые</button>
+      <button class="tab-btn" data-tab="completed">Завершённые</button>
+    </div>
+    
+    <div id="requestsContainer">
+      <div style="background:white; border-radius:12px; padding:40px; text-align:center; color:#888;">
+        Загрузка заявок...
+      </div>
+    </div>
+  </div>
+  
+  <!-- Модалка выбора времени -->
+  <div id="timePickerModal" class="modal">
+    <div class="modal-content">
+      <h2>Предложите время клиенту</h2>
+      <input type="text" id="datetimePicker" placeholder="Выберите дату и время">
+      <button id="addTimeBtn">Добавить ещё время</button>
+      <div id="selectedTimesList" style="margin-top: 15px;"></div>
+      <button id="sendTimesBtn">Отправить клиенту</button>
+      <button onclick="closeTimePickerModal()" style="background:#999;">Отмена</button>
+    </div>
+  </div>
+  
+  <!-- Модалка оценки клиента -->
+  <div id="clientRatingModal" class="modal">
+    <div class="modal-content">
+      <h2>Завершить запись</h2>
+      <p>Оцените клиента:</p>
+      <div style="display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap;">
+        <button onclick="rateClient(5)">Отличный клиент</button>
+        <button onclick="rateClient(4)">Хороший клиент</button>
+        <button onclick="rateClient(3)">Нормально</button>
+      </div>
+      <button onclick="closeClientRatingModal()" style="background:#999;">Пропустить</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script type="module" src="master.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoSvg = document.getElementById('logoSvg');
+      const logoText = document.getElementById('logoText');
+      let timeoutId = null;
+      
+      function showText() {
+        logoSvg.classList.add('hide');
+        setTimeout(() => {
+          logoSvg.style.display = 'none';
+          logoText.style.display = 'block';
+          logoText.classList.remove('hide');
+          
+          timeoutId = setTimeout(() => {
+            showLogo();
+          }, 6000);
+        }, 300);
+      }
+      
+      function showLogo() {
+        logoText.classList.add('hide');
+        setTimeout(() => {
+          logoText.style.display = 'none';
+          logoSvg.style.display = 'block';
+          logoSvg.classList.remove('hide');
+          logoSvg.classList.add('show');
+          
+          setTimeout(() => {
+            logoSvg.classList.remove('show');
+          }, 300);
+          
+          timeoutId = setTimeout(() => {
+            showText();
+          }, 5000);
+        }, 300);
+      }
+      
+      timeoutId = setTimeout(() => {
+        showText();
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
